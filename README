@@ -1,6 +1,7 @@
 This tool can split a flac image into tracks
 
-Tested on debian with EAC+wine
+Tested with EAC+wine
 
 Cuesheet must be written by EAC, CDRWin, CDRCue, or whatever formats cuetools supports
 Syntax: http://digitalx.org/cue-sheet/syntax/
+Reference: https://wiki.archlinux.org/index.php/CUE_Splitting
