@@ -1,6 +1,12 @@
 This tool can split a flac image into tracks
 
+Usage:
+$ cd /path/to/flac/image/
+$ flac-split
+
 Tested with EAC+wine
+
+This assumes that the .cue and .flac are in the same directory
 
 Cuesheet must be written by EAC, CDRWin, CDRCue, or whatever formats cuetools supports
 Syntax: http://digitalx.org/cue-sheet/syntax/
