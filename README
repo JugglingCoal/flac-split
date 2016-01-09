@@ -4,6 +4,9 @@ Usage:
 $ cd /path/to/flac/image/
 $ flac-split
 
+or
+$ flac-split image.flac image.cue
+
 Tested with EAC+wine
 
 This assumes that the .cue and .flac are in the same directory
