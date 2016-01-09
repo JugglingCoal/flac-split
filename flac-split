@@ -1,20 +1,25 @@
 #!/bin/bash
 # Use this script to split a flac image into tracks
 
-FLAC_FILE="$(ls | grep *.flac)"
+IMAGE_FILE="$(ls | grep *.flac)"
 CUE_FILE="$(ls | grep *.cue)"
 
-echo "[FLAC input] $FLAC_FILE"
-echo "[CUE input ] $CUE_FILE"
+if [ "x$IMAGE_FILE" == "x" ] || [ "x$CUE_FILE" == "x" ]; then
+	echo ".flac or .cue not found"
+	exit 1
+fi
+
+echo "[IMAGE] $IMAGE_FILE"
+echo "[ CUE ] $CUE_FILE"
 
 # Split image, encode to flac, and verify the encode
-shnsplit -f "$CUE_FILE" -o "flac flac -8 -V -o %f -" -t "%n - %t" "$FLAC_FILE"
+shnsplit -f "$CUE_FILE" -o "flac flac -8 -V -o %f -" -t "%n - %t" "$IMAGE_FILE"
 
 # rename original image temporarily for next step
-mv "$FLAC_FILE" "x"
+mv "$IMAGE_FILE" "x"
 
 # Tag newly made files using cue
 cuetag "$CUE_FILE" *.flac
 
 # Rename the image back
-mv "x" "$FLAC_FILE"
+mv "x" "$IMAGE_FILE"
