@@ -16,10 +16,10 @@ echo "[ CUE ] $CUE_FILE"
 shnsplit -f "$CUE_FILE" -o "flac flac -8 -V -o %f -" -t "%n - %t" "$IMAGE_FILE"
 
 # rename original image temporarily for next step
-mv "$IMAGE_FILE" "x"
+mv "$IMAGE_FILE" "${IMAGE_FILE}.original"
 
 # Tag newly made files using cue
 cuetag "$CUE_FILE" *.flac
 
 # Rename the image back
-mv "x" "$IMAGE_FILE"
+mv "${IMAGE_FILE}.original" "$IMAGE_FILE"
