@@ -1,13 +1,32 @@
 #!/bin/bash
 # Use this script to split a flac image into tracks
 
-IMAGE_FILE="$(ls | grep *.flac)"
-CUE_FILE="$(ls | grep *.cue)"
+IMAGE_FILE=''
+CUE_FILE=''
 
-if [ "x$IMAGE_FILE" == "x" ] || [ "x$CUE_FILE" == "x" ]; then
-	echo ".flac or .cue not found"
-	exit 1
+if [ $# -eq 0 ]; then
+	IMAGE_FILE="$(ls | grep *.flac)"
+	CUE_FILE="$(ls | grep *.cue)"
+
+	if [ "x$IMAGE_FILE" == "x" ] || [ "x$CUE_FILE" == "x" ]; then
+		echo ".flac or .cue not found"
+		exit 1
+	fi
+else
+	while [ "$1" ]; do
+		if [[ "$1" =~ .*\.flac$ ]]; then
+			IMAGE_FILE="$1"
+		elif [[ "$1" =~ .*\.cue$ ]]; then
+			CUE_FILE="$1"
+		fi
+		shift
+	done
+	if [ ! -f "$IMAGE_FILE" ] || [ ! -f "$CUE_FILE" ]; then
+		echo ".flac or .cue not found"
+		exit 2
+	fi
 fi
+
 
 echo "[IMAGE] $IMAGE_FILE"
 echo "[ CUE ] $CUE_FILE"
