@@ -4,15 +4,19 @@
 IMAGE_FILE=''
 CUE_FILE=''
 
+# If we don't have arguments, then we search for a .flac and a .cue in the 
+# current directory
 if [ $# -eq 0 ]; then
 	IMAGE_FILE="$(ls | grep *.flac)"
 	CUE_FILE="$(ls | grep *.cue)"
 
+	# Empty strings because we didn't find anything
 	if [ "x$IMAGE_FILE" == "x" ] || [ "x$CUE_FILE" == "x" ]; then
 		echo ".flac or .cue not found"
 		exit 1
 	fi
 else
+	# We have arguments
 	while [ "$1" ]; do
 		if [[ "$1" =~ .*\.flac$ ]]; then
 			IMAGE_FILE="$1"
@@ -21,6 +25,7 @@ else
 		fi
 		shift
 	done
+	# Check if the files specified by arguments exist
 	if [ ! -f "$IMAGE_FILE" ] || [ ! -f "$CUE_FILE" ]; then
 		echo ".flac or .cue not found"
 		exit 2
