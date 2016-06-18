@@ -39,6 +39,9 @@ echo "[ CUE ] $CUE_FILE"
 # Split image, encode to flac, and verify the encode
 shnsplit -f "$CUE_FILE" -o "flac flac -8 -V -o %f -" -t "%n - %t" "$IMAGE_FILE"
 
+# Get rid of pregap files
+find . -name "*pregap*" -exec rm {} \;
+
 # rename original image temporarily for next step
 mv "$IMAGE_FILE" "${IMAGE_FILE}.original"
 
