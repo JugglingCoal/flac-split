@@ -34,8 +34,7 @@ fi
 
 
 echo "[IMAGE] $IMAGE_FILE"
-echo "[ CUE ] $CUE_FILE"
-echo "[  N  ] "$(cat "$CUE_FILE" | sed -e 's/^\s\s*//g' | grep ^TRACK | wc -l) Tracks
+echo "[ CUE ] $CUE_FILE <>" $(cat "$CUE_FILE" | sed -e 's/^\s\s*//g' | grep ^TRACK | wc -l) Tracks
 
 # Split image, encode to flac, and verify the encode
 shnsplit -f "$CUE_FILE" -o "flac flac -8 -V -o %f -" -t "%n - %t" "$IMAGE_FILE"
